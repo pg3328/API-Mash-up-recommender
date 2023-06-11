@@ -1,4 +1,4 @@
-# Nearest API Finder
+# API Mashup Recommender
 
 This application is designed to provide information about the nearest possible APIs hosted on ProgrammableWeb based on user input. It is built using the Flask framework, which connects the front-end and back-end components. User input is collected through the user interface and passed to the back-end for processing.
 
