@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search Service</title>
+	<style>
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		input[type="text"], select, textarea {
+			width: 200px;
+			padding: 5px;
+			margin-bottom: 10px;
+			font-size: 16px;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+		}
+
+		input[type="submit"] {
+			padding: 10px;
+			background-color: #4CAF50;
+			color: white;
+			font-size: 16px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		#keyword-input, #api-inputs, #mashup-inputs, #apis-input,#protocols {
+			display: none;
+		}
+
+		h1 {
+			font-size: 28px;
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Search Service</h1>
+
+	<form action="/submit" method="post">
+        
+        <label for="request-select">Request:</label>
+		<select id="request-select" name="request">
+            <option value="select">Please select</option>
+			<option value="keyword">Search by Keyword</option>
+			<option value="other">Other</option>
+		</select>
+
+
+		<label for="service-select">Service:</label>
+		<select id="service-select" name="service">
+            <option value="select">Please select</option>
+			<option value="mashup">Mashup</option>
+			<option value="api">API</option>
+		</select>
+
+		<div id="keyword-input">
+			<label for="keywords">Keywords:</label>
+			<input type="text" id="keywords" name="keywords">
+		</div>
+
+		<div id="api-inputs">
+			<label for="updated-year">Updated Year:</label>
+			<input type="text" id="updated-year" name="updated-year">
+
+			<label for="rating">Rating:</label>
+			<select id="rating" name="rating">
+				<option value="1-2">1-2</option>
+				<option value="2-3">2-3</option>
+				<option value="3-4">3-4</option>
+				<option value="4-5">4-5</option>
+				<option value="5">5</option>
+			</select>
+			<label for="tags">Tags:</label>
+			<textarea id="tags" name="tags" placeholder="Write all the tags separated by comma"></textarea>
+		</div>
+        <div id="apis-input">
+            <label for="apis">APIs:</label>
+            <textarea id="apis" name="apis" placeholder="Write all the APIs separated by comma"></textarea>
+        </div>
+		<div id="protocols">
+            <label for="protocols">Protocols:</label>
+            <textarea id="protocols-now" name="protocols" placeholder="REST/SOAP"></textarea>
+        </div>
+
+
+		<button type="submit">Submit</button>
+	</form>
+
+		{% block content %}
+  			<h1>Results</h1>
+  			<ul>
+    			{% for name in names %}
+      				<li>{{name}}</li>
+				{% endfor %}
+  			</ul>
+		{% endblock %}
+
+
+	<script>
+		const serviceSelect = document.getElementById("service-select");
+        const requestSelect = document.getElementById("request-select");
+        const keywordInput = document.getElementById("keyword-input");
+        const apiInputs = document.getElementById("api-inputs");
+        const mashupInputs = document.getElementById("mashup-inputs");
+        const updatedYearInput = document.getElementById("updated-year");
+        const ratingInput = document.getElementById("rating");
+        const tagsInput = document.getElementById("tags");
+        const apisInput = document.getElementById("apis-input");
+        const protocolsInput = document.getElementById("protocols");
+ 
+        serviceSelect.addEventListener("change", function() {
+        	serviceSelect.style.display = "block"
+			if(this.value === "mashup")
+			{   if(requestSelect.value ==="keyword"){
+					keywordInput.style.display = "block";
+				}
+				else{
+				keywordInput.style.display="none"
+				apisInput.style.display="block";
+				apiInputs.style.display="block";
+				protocolsInput.style.display="none";
+				}
+			}
+			else
+			{
+				if(requestSelect.value ==="keyword"){
+					keywordInput.style.display = "block";
+				}
+				else{
+				keywordInput.style.display="none";
+				protocolsInput.style.display="block"
+				apiInputs.style.display = "block";
+				apisInput.style.display="none";
+				}
+			}
+		});
+
+    
+    </script>
+</body>
+</html>
