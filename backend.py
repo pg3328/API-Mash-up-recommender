@@ -88,14 +88,10 @@ def submit():
             return render_template("index.html", names=name)
     else:
         my_updated_year = request.form.get("updated-year")
-        print(my_updated_year)
         my_rating = request.form.get("rating")
-        print(my_rating)
         my_rating = my_rating.split('-')
-        print(my_rating)
         my_tags = request.form.get("tags")
         my_tags = my_tags.split(',')
-        print(my_tags)
         if my_service == "mashup":
             my_apis = request.form.get("apis")
             my_apis = my_apis.split(',')
