@@ -3,7 +3,7 @@ from urllib.parse import quote_plus
 
 client_id = 'mongodb+srv://pg3328:room919@N@programmingweb.2jrqleo.mongodb.net/?retryWrites=true&w=majority'
 username = "pg3328"
-password = "room919@N"
+password = "xxxxxx"
 client_id = client_id.replace(username, quote_plus(username))
 client_id = client_id.replace(password, quote_plus(password))
 
