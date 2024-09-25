@@ -13,7 +13,6 @@ def query1(update_year,protocol,lower_rating,upper_rating,tags):
     api_data = db["api_collection"]
     result = api_data.find(query)
     api_names = [doc['name'] for doc in result]
-    print(api_names)
     return api_names
 
 
@@ -71,17 +70,12 @@ def home():
 @app.route('/submit', methods=['POST'])
 def submit():
     my_request = request.form.get("request")
-    print(my_request)
     my_service = request.form.get("service")
-    print(my_service)
     if my_request == "keyword":
         my_keywords = request.form.get("keywords")
         my_keywords = my_keywords.split(',')
-        print(my_keywords)
         if my_service == "mashup":
-            print("a")
             name = search_mashup_by_keywords(my_keywords)
-            print(name)
             return render_template("index.html", names=name)
         else:
             name = search_api_by_keywords(my_keywords)
